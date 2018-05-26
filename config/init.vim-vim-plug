@@ -1,0 +1,70 @@
+call plug#begin('~/.config/nvim/bundle')
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'wincent/command-t'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'zchee/deoplete-jedi'
+Plug 'trevordmiller/nova-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
+Plug 'fatih/vim-go'
+" call PlugInstall to install new plugins
+call plug#end()
+
+" basics
+filetype plugin indent on " required
+"set incsearch
+"set ignorecase
+"set smartcase
+"set nohlsearch
+set tabstop=4
+set softtabstop=0
+set shiftwidth=4
+set noexpandtab
+set nobackup
+set noswapfile
+syntax on
+set number
+
+" preferences
+" change spacing for language specific
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
+" plugin settings
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+" use tab to forward cycle
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" use tab to backward cycle
+inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" Theme
+syntax enable
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+set background=dark
+colorscheme nova
+
+" NERDTree
+
+" Syntastic settings
+set statusline+=%#warningmsg#
+let g:statline_syntastic = 0
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+ 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+ 
+let g:syntastic_cpp_chekcers = ['syntastic-cpp-cppcheck']
+let g:syntastic_mode_map = { "mode": "passive" }
+ 
+" CommandT
+let g:CommandTMaxFiles=800000
